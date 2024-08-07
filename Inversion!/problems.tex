@@ -1,0 +1,73 @@
+\documentclass{scrartcl}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, graphicx}
+\usepackage[sexy]{evan}
+
+\usepackage{setspace}
+\setstretch{1.1}
+\author{Brian and Celestia}
+
+\begin{document}
+\section{Problems}
+\begin{problem}
+the circles $K_1$ and $K_2$ intersect at two distinct points $A$ and $M$. Let the tangent to $K_1$ at $A$ meet $K_2$ again at $B$ and let the tangent to $K_2$ at $A$ meet $K_1$ again at $D$. Let $C$ be the point such that $M$ is the midpoint of $AC$. Prove that $ABCD$ is cyclic. 
+\end{problem}
+\begin{problem}
+Let $P$, $Q$ and $R$ be three points on a circle $C$, such that $PQ$ = $PR$ and $PQ > QR$. Let $D$ be the circle with centre $P$ that passes through $Q$ and $R$. suppose that the circle with center $Q$ and passing through $R$ intersects $C$ again at $X$ and $D$ again at $Y$. Prove that $P$, $X$, and $Y$ are collinear. 
+\end{problem}
+%NZMO 2020/4
+\begin{problem}
+Let $\Gamma_1$ and $\Gamma_2$ be circles internally tangent at $A$ with $\Gamma_1$ inside $\Gamma_2$. Let $BC$ be a chord of $\Gamma_2$ which is tangent to $\Gamma_1$ at $D$. Prove that $AD$ bisects $\angle BAC$. 
+\end{problem}
+\begin{problem}
+Two circles, $\omega_1$ and $\omega_2$ of equal radius intersect at different points $X_1$ and $X_2$. Consider a circle $\omega$ externally tangent to $\omega_1$ at a point $T_1$ and internally tangent to $W_2$ at a point $T_2$. Prove that lines $X_1T_1$ and $X_2T_2$ intersect at a point lying on $\omega$. 
+\end{problem}
+%USAMO 1995/3 way easier without inversion
+% \begin{problem} 
+% Given a nonisosceles, nonright triangle $ABC$, let $O$ be its circumcenter, and let $A_1$, $B_1$ and $C_1$ be the midpoints of $BC$, $AC$ and $AB$ respectively. Point $A_2$ is located on the ray $OA_1$ so that $\Delta OAA_1$ is similar to $\Delta OA_2A$. Points $B_2$ and $C_2$ on rays $OB_1$ and $OC_1$ are defined similarly. Prove that $AA_2$, $BB_2$ and $CC_2$ are concurrent. 
+% \end{problem}
+%USAMO 1993/2
+\begin{problem}
+Let $ABCD$ be a quadtrilateral whose diagonals $AC$ and $BD$ are perpendicular and intersect at $E$. Prove that the reflections of $E$ across $AB$, $BC$, $CD$ and $DA$ are concyclic.
+\end{problem}
+%BAMO 2008/6
+\begin{problem}
+A point $D$ lies inside triangle $ABC$. Let $A_1, B_1, C_1$ be the second intersection points of the lines $AD$, $BD$, and $CD$ with the circumcircles of $BDC$, $CDA$, and $ADB$, respectively. Prove that
+$\frac{AD}{AA_1} + \frac{BD}{BB_1}  + \frac{CD}{CC_1} = 1.$
+\end{problem}
+%NIMO 2014
+\begin{problem}
+Let $ABC$ be a triangle and let $Q$ be a point such that $AB \perp QB$ and $AC \perp QC$. A circle with center I is inscribed in $\Delta ABC$, and is tangent to $BC$, $CA$ and $AB$ at points $D$, $E$ and $F$ respectively. If ray $QI$ intersects $EF$ at $P$, prove that $DP \perp EF$. 
+\end{problem}
+%ISL 2017G4
+\begin{problem}
+In triangle $ABC$, let $\omega$ be the excircle opposite $A$. Let $D$, $E$, and $F$ be the points where $\omega$ is tangent to lines $BC$, $CA$, and $AB$, respectively. The circle $AEF$ intersects line $BC$ at $P$ and $Q$. Let $M$ be the midpoint of $AD$. Prove that the circle $MPQ$ is tangent to $\omega$. 
+\end{problem}
+%ISL 2017G3
+\begin{problem}
+Let O be the circumcenter of an acute scalene triangle $ABC$. Line $OA$ intersects the altitudes of $ABC$ through $B$ and $C$ at $P$ and $Q$, respectively. The altitudes meet at $H$. Prove that the circumcenter of triangle $PQH$ lies on a median of triangle $ABC$. 
+\end{problem}
+% ISL 2014G4
+\begin{problem}
+Consider a fixed circle $\Gamma$ with three fixed points $A$, $B$, and $C$ on it. Also, let us fix a real number $\lambda \in (0, 1)$. For a variable point $P \notin {A, B, C}$ on $\Gamma$, let $M$ be the point on the segment $CP$ such that $CM$ = $\lambda \cdot CP$. Let $Q$ be the second point of intersection of the circumcircles of the triangles $AMP$ and $BMC$. Prove that as $P$ varies, the point Q lies on a fixed circle. 
+\end{problem}
+%EGMO 2023/6
+\begin{problem} Let $ABC$ be a triangle with circumcircle $\Omega$. Let $S_b$ and $S_c$ denote the midpoints of arc $AC$ not containing $B$ and $AB$ not containing $C$. Let $N_a$ denote the midpoint of arc $BC$ containing A. Let $I$ be the incentre of $ABC$. Let $\omega_b$ be the circle that is tangent to $AB$ and internally tangent to $\Omega$ at $S_b$. Let $\omega_c$ be the circle that is tangent to $AC$ and internally tangent to $\Omega$ at $S_c$. Show that the line $IN_a$ and the radical axis of $\omega_b$ and $\omega_c$ meet on $\Omega$. 
+\end{problem}
+\newpage
+
+\section{Hints}
+\begin{enumerate}
+  \item What's the point that all the lines and circles go through?
+  \item Invert about $Q$
+  \item Let $M$ be the midpoint of arc $BC$. Prove that $A$, $D$ and $M$
+ are collinear. 
+  \item Rephrase the equal radii condition as a circle
+  \item Rephrase reflections as intersections of circles
+  \item Invert then area ratio
+  \item Let $QI$ intersect the circumcircle again at $X$. Prove that $X$, $I$ and the foot of altitude are collinear.
+  \item Negative inversion
+  \item Root bc inversion
+  \item Let $D$ be the point on segment $AB$ such that $BD = \lambda \cdot BA$. Consider the circle tangent to $BC$ at $B$ and passing through $D$.
+  \item Root bc inversion, with setup. Alternatively, inversion preserves cross ratio. 
+\end{enumerate}
+\end{document}

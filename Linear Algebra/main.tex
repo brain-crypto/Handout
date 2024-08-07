@@ -1,0 +1,492 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{evan}
+\usepackage{soul}
+\usepackage{graphicx} % Make sure to include this package
+
+\author{Brian Zhao, NZMOC}
+\usepackage{answers}
+\Newassociation{hint}{hintitem}{all-hints}
+\renewcommand{\solutionextension}{out}
+
+\begin{document}
+
+% Title and Images in line
+\noindent % Prevents indentation at the beginning of the paragraph
+\begin{minipage}[c]{0.2\textwidth} % Adjust width as needed
+    \includegraphics[width=\textwidth]{jane-street-logo.png}
+\end{minipage}
+\begin{minipage}[c]{0.6\textwidth} % Adjust width as needed
+    \title{``Linear Algebra''}
+    \date{15 Jan 2024}
+    \maketitle
+\end{minipage}
+\hfill % Fills the horizontal space between minipages
+\begin{minipage}[c]{0.2\textwidth} % Adjust width as needed
+    \includegraphics[width=\textwidth]{nzmoc-logo.png}
+\end{minipage}
+
+\section{Warm-up}
+\begin{exercise}
+  Write the Cartesian coordinates of a rectangle whose sides aren't parallel to the x-axis.
+\end{exercise}
+\begin{exercise}
+  You are doing your least favourite subject's homework. What song(s) do you play to motivate yourself?
+\end{exercise}
+\begin{exercise}
+  \st{Do 5 star jumps.} For the rest of this handout, do 5 star jumps for every problem you solve. Also, when you are stuck on a problem for more than 10 minutes, do 5 star jumps.\footnote{This is Eric's idea don't blame me :D}
+\end{exercise}
+
+\section{Vectors and Matrices}
+\begin{abstract}
+  \sffamily
+  I asked my professor how linear algebra would help me in real life. He said, 'It's simple. It won't.'
+  \medskip
+  
+  --- ChatGPT
+\end{abstract}
+Imagine a sequence of numbers.
+\begin{center}$(69, 420)$\end{center}
+Now rotate them by $90^{\circ}$.
+\begin{center}$\begin{pmatrix} 69\\420 \end{pmatrix}$\end{center}
+Cool now we have a vector.\\
+Vectors represent movements. For example, this one represents moving 69 units to the right and 420 units upward. \\
+If we set the start of the vector to the origin, the vector becomes a position vector, because it points at the position $(69, 420)$ on the grid.\\
+When two vectors have the same dimensions you can dot multiply them together.
+\begin{center}$\begin{pmatrix} 69\\420 \end{pmatrix} \cdot \begin{pmatrix} -915\\341 \end{pmatrix} = 69\times-915 + 420\times341 = 80085$\end{center}
+When you put vectors side by side you get a matrix. 
+\begin{center}$\begin{pmatrix} 69 & 1 & 2 \\ 420 & 3 & 4 \end{pmatrix}$\end{center}
+Notice how this matrix can represent a triangle with vertices $(69, 420)$, $(1, 3)$, $(2, 4)$\\
+If two matrices are compatible (1st matrix's \#columns = 2nd matrix's \#rows) then you can multiply them together.
+\begin{center}
+  $\begin{pmatrix} -915 & 341 \\ 5 & 6 \end{pmatrix}
+  \times
+  \begin{pmatrix} 69 & 1 & 2 \\ 420 & 3 & 4 \end{pmatrix}
+  =
+  \begin{pmatrix} 80085 & 108 & -466 \\ 2865 & 23 & 34 \end{pmatrix}$
+\end{center}
+Notice how the value of cell (x, y) is the dot product of 1st matrix's yth row and 2nd matrix's xth column.\\
+A square matrix has a determinant. A 2x2 matrix's determinant is
+\begin{center}
+  $\begin{vmatrix} a & b \\ c & d \end{vmatrix} = ad - bc$
+\end{center}
+A 3x3 matrix's determinant is
+\begin{center}
+  $\begin{vmatrix} a & b & c \\ d & e & f \\ g & h & i \end{vmatrix} = a\begin{vmatrix} e & f \\ h & i \end{vmatrix} + b\begin{vmatrix} h & i \\ d & g \end{vmatrix} + c\begin{vmatrix} d & g \\ e & f \end{vmatrix}$
+\end{center}
+A 4x4 matrix's determinant is...thanks god we don't need to know.\\
+As you can see determinants are a pain in the ass to calculate. Thankfully we have the following rules:
+\begin{proposition}
+  Let $A$ be a matrix, and $B$ be a matrix formed by swapping either a pair of rows or a pair of columns in $A$. Then $det A = - det B$.
+\end{proposition}
+\begin{proposition} \label{timek}\
+  \begin{center}
+    $\begin{vmatrix} ka & b & c \\ kd & e & f \\ kg & h & i \end{vmatrix} =
+    k\begin{vmatrix} a & b & c \\ d & e & f \\ g & h & i \end{vmatrix} $
+  \end{center}
+    Analogous results hold for any row or column. 
+\end{proposition}
+\begin{proposition}\label{addcolumn}\
+  \begin{center}
+    $\begin{vmatrix} a & b & c \\ d & e & f \\ g & h & i \end{vmatrix} =
+    \begin{vmatrix} a+kb & b & c \\ d+ke & e & f \\ g+kh & h & i \end{vmatrix} $\
+  \end{center}
+    Analogous results hold for any pair of rows or pair of columns. 
+\end{proposition}
+\begin{exercise}
+  $\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}
+  \times
+  \begin{pmatrix} 5 & 6 \\ 7 & 8 \end{pmatrix} =$
+\end{exercise}
+\begin{exercise}
+  $\begin{vmatrix} \frac{a+b-2c}{ad} & ad+cd-2bd & b+c-2a \\ \frac{a+b-2d}{ad} & ad+d^2-2bd & b+d-2a \\ \frac{a+b-2e}{ad} & ad+ed-2bd & b+e-2a \end{vmatrix}=$
+\end{exercise}
+
+\section{Trivial Observations}
+\begin{abstract}
+  \sffamily
+  Y'all create diagrams for geo? 
+  \medskip
+  
+  --- anonymous Thai team member
+\end{abstract}
+All that fluff just made coordinate bash a bit easier by giving us the following fun facts. 
+\begin{fact}
+  $+\vec{a}$
+  represents a translation by vector $\vec{a}$.
+\end{fact}
+\begin{fact}
+  $k\vec{a}$
+  represents a homothety with scale factor k.
+\end{fact}
+\begin{fact}
+  $\begin{pmatrix} cos\theta & sin\theta \\ -sin\theta & cos\theta \end{pmatrix}
+  \times
+  \vec{a}$
+  represents a rotation by $\theta^{\circ}$ anticlockwise.
+\end{fact}
+\begin{example} [Lemniscate Transmutation]
+    $\begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}
+  \times
+  8=\infty$
+\end{example}
+\begin{fact} 
+  $\vec{a}\cdot\vec{b}=|\vec{a}||\vec{b}|cos\theta$. Notably, when $\vec{a}$ and $\vec{b}$ are perpendicular $\vec{a}\cdot\vec{b}=0$.
+\end{fact}
+\begin{fact} [Shoelace Formula] \label{shoelace}
+  $A$, $B$, $C$ are collinear iff $\begin{vmatrix} x_a & y_a & 1 \\ x_b & y_b & 1 \\ x_c & y_c & 1\end{vmatrix} = 0$
+\end{fact}
+\begin{fact} \label{concurrent}
+  $a_1x+b_1y=c_1$, $a_2x+b_2y=c_2$, $a_3x+b_3y=c_3$ are concurrent iff $\begin{vmatrix} a_1 & b_1 & c_1 \\ a_2 & b_2 & c_2 \\ a_3 & b_3 & c_3 \end{vmatrix} = 0$
+\end{fact}
+\begin{fact} \label{midpoint}
+  midpoint $\vec{m}=\frac{1}{2}(\vec{a}+\vec{b})$
+\end{fact}
+\begin{fact} \label{centroid}
+  For any $\triangle ABC$, centroid 
+  $\vec{g}=\frac{1}{3}(\vec{a}+\vec{b}+\vec{c})$
+\end{fact}
+\begin{fact} \label{euler line}
+  For $\triangle ABC$ that has the origin as its circumcenter,
+  nine-point center $\vec{n}=\frac{1}{2}(\vec{a}+\vec{b}+\vec{c})$,
+  orthocenter $\vec{h}=\vec{a}+\vec{b}+\vec{c}$, and 
+  $k(\vec{a}+\vec{b}+\vec{c})$ is the Euler line.
+\end{fact}
+\begin{fact}
+  Suppose circle 1 has equation (1), and circle 2 has equation (2). Their radical axis's equation is $(1)-(2)$.
+\end{fact}
+\begin{example} [Existence of Centroid]
+  Prove that the medians of $\triangle ABC$ are concurrent.
+\end{example}
+\begin{soln}
+  Let $A=(x_1, y_1)$, $B=(x_2, y_2)$, $C=(x_3, y_3)$ respectively. \\
+  The midpoint of $BC$, $M_1$, $=(\cfrac{x_2+x_3}{2}, \cfrac{y_2+y_3}{2})$ \\
+  The $A$-median's equation is $(\cfrac{x_2+x_3}{2}-x_1)(y-y_1)=(\cfrac{y_2+y_3}{2}-y_1)(x-x_1)$\\
+  Rearrange to get $(\cfrac{y_2+y_3}{2}-y_1)x+(x_1-\cfrac{x_2+x_3}{2})y=\cfrac{x_1y_2-x_2y_1+x_1y_3-x_3y_1}{2}$\\
+  We can get the equations of $B$-median and $C$-median by symmetry. Now we just need to prove\\
+  $\begin{vmatrix} 
+  \cfrac{y_2+y_3}{2}-y_1 & x_1-\cfrac{x_2+x_3}{2} & \cfrac{x_1y_2-x_2y_1+x_1y_3-x_3y_1}{2} \\
+  \cfrac{y_1+y_3}{2}-y_2 & x_2-\cfrac{x_1+x_3}{2} & \cfrac{x_2y_1-x_1y_2+x_2y_3-x_3y_2}{2} \\
+  \cfrac{y_1+y_2}{2}-y_3 & x_3-\cfrac{x_1+x_2}{2} & \cfrac{x_3y_2-x_2y_3+x_3y_1-x_1y_3}{2} \\
+  \end{vmatrix}=0$\\
+  We can simplify it using \ref{addcolumn}\\
+  $=\begin{vmatrix} 
+  \cfrac{y_2+y_3}{2}-y_1+\cfrac{y_1+y_3}{2}-y_2+\cfrac{y_1+y_2}{2}-y_3 & x_1-\cfrac{x_2+x_3}{2}+x_2-\cfrac{x_1+x_3}{2}+x_3-\cfrac{x_1+x_2}{2} & \cfrac{x_1y_2-x_2y_1+x_1y_3-x_3y_1}{2}you can't \\
+  \cfrac{y_1+y_3}{2}-y_2 & x_2-\cfrac{x_1+x_3}{2} & read this \\
+  \cfrac{y_1+y_2}{2}-y_3 & x_3-\cfrac{x_1+x_2}{2} & right \\
+  \end{vmatrix}$\\
+  $=\begin{vmatrix} 
+  0 & 0 & 0 \\
+  \cfrac{y_1+y_3}{2}-y_2 & x_2-\cfrac{x_1+x_3}{2} & \cfrac{x_2y_1-x_1y_2+x_2y_3-x_3y_2}{2} \\
+  \cfrac{y_1+y_2}{2}-y_3 & x_3-\cfrac{x_1+x_2}{2} & \cfrac{x_3y_2-x_2y_3+x_3y_1-x_1y_3}{2} \\
+  \end{vmatrix}=0$\\  
+\end{soln}
+Despite one matrix going out of the page, that was definitely a pretty quick bash. Alternatively, since we know the centroid's coordinates from \ref{centroid}, we can prove that it is collinear with $A$ and $M_1$, then quote symmetry.
+\begin{remark}
+  Usually it's a good idea to set one side (e.g. $BC$) as the x-axis in a coordinate bash, so you can use easy coordinates like $B=(0, 0)$. However, sometimes not doing this allows us to exploit symmetries, especially if we plan on using matrices.
+\end{remark}
+\begin{exercise}[Radical center]
+  Prove that the radical axes of three circles are concurrent. 
+\end{exercise}
+\begin{exercise}[Existence of Circumcenter]
+  Prove that the perpendicular bisectors of $\triangle ABC$ are concurrent.
+\end{exercise}
+
+\section{Minor Caveats}
+\begin{abstract}
+  \sffamily
+  I don't know how to use a compass.
+  \medskip
+  
+  --- anonymous Chinese team member
+\end{abstract}
+Cartesian coordinates are kinda cringe. Like you need two numbers to describe just one point? If only there is a number that naturally contains two components. Oh wait there is?
+\begin{definition}
+  Let a lowercase letter represents the complex coordinate of the point denoted by its uppercase letter. E.g. if $A=(x, y)$ then $a=x+iy$. 
+\end{definition}
+\begin{fact}
+  $+a$
+  represents a translation by vector $\vec{a}$.
+\end{fact}
+\begin{fact}
+  $\times a$
+  represents a rotation by $arg(a)$ anticlockwise followed by a homothety with scale factor $|a|$, both centred at the origin.
+\end{fact}
+This is because every complex number can be expressed as $re^{i\theta}$, and when you multiply two together, their magnitudes are multiplied and their arguments are added: 
+\begin{center}
+  $r_1e^{i\theta_1} \times r_2e^{i\theta_2} = r_1r_2e^{i(\theta_1+\theta_2)}$
+\end{center}
+In particular, multiplying by an imaginary number is like rotating by $90^{\circ}$. This yields the perpendicularity criterion:
+\begin{center}
+  $\vec{a} \perp \vec{b}$ iff $a = ki \cdot b$
+\end{center}
+Alternatively,
+\begin{fact} \label{cperp}
+  $\vec{a} \perp \vec{b}$ iff $\frac{a}{b}\in i\mathbb{R}$
+\end{fact}
+\begin{fact} \label{cpara}
+  $\vec{a} \parallel \vec{b}$ iff $\frac{a}{b}\in\mathbb{R}$
+\end{fact}
+Furthermore, \ref{midpoint}, \ref{centroid}, \ref{euler line} carry over directly. \\
+Now you might notice a problem---complex numbers are convenient when we don't need to consider the real and imaginary components separately. But what if we do? To handle that, we use complex conjugates, which can be think of as reflections in the real axis. 
+\begin{definition}
+  Let $\overline{a}$ be the complex conjugate of $a$. E.g. if $a=x+iy$ then $\overline{a}=x-iy$.
+\end{definition}
+\begin{fact} \label{Re and Im}
+  $Re(a)=\frac{1}{2}(a+\overline{a}), Im(a)=\frac{1}{2}(a-\overline{a})$
+\end{fact}
+\begin{fact} \label{distributive}
+  $\overline{a+b} = \overline{a}+\overline{b}$ and $\overline{a\times b}=\overline{a}\times\overline{b}$
+\end{fact}
+\ref{Re and Im} is often used to determine whether the result is purely real / purely imaginary in \ref{cperp} and \ref{cpara}.
+Conjugates are also used in a variant of \ref{shoelace}:
+\begin{fact} \label{clinear}
+  $A$, $B$, $C$ are collinear iff
+  $\begin{vmatrix} a & \overline{a} & 1 \\ b & \overline{b} & 1 \\ c & \overline{c} & 1 \end{vmatrix} = 0$\\
+\end{fact}
+\begin{fact}
+  $\triangle ABC$ and $\triangle XYZ$ are similar iff $\begin{vmatrix} a & x & 1 \\ b & y & 1 \\ c & z & 1 \end{vmatrix} = 0$ or $\begin{vmatrix} a & \overline{x} & 1 \\ b & \overline{y} & 1 \\ c & \overline{z} & 1 \end{vmatrix} = 0$
+\end{fact}
+\begin{exercise}
+  Given a point $B$ and a circle with radius $OA$, work out the criterion for whether $AB$ is a tangent. 
+\end{exercise}
+All that conjugates can be a pain to deal with. I mean they are like new variables in your equations, and we all know more variables = bad. This is why we like to place points on the unit circle to get rid of their conjugates. 
+\begin{proposition} \label{cdistance}
+  $a\overline{a}=(x+iy)(x-iy)=x^2+y^2=|a|^2$ \\
+  In particular, when $|a|=1$, $\overline{a}=\frac{1}{a}$
+\end{proposition}
+This tends to simplify formulas a lot. For example, here is the formula for foot of altitude from $Z$ to $AB$:
+\begin{center}
+  $\cfrac{(\overline{a}-\overline{b})z+(a-b)\overline{z}+\overline{a}b-a\overline{b}}{2(\overline{a}-\overline{b})}$
+\end{center}
+Here is the same formula when $A$, $B$ lie on the unit circle:
+\begin{center}
+  $\frac{1}{2}(a+b+z-ab\overline{z})$
+\end{center}
+We usually set the circumcircle as the unit circle. This means that, by \ref{euler line}, complex bash usually has some nice formulations for triangle centers.
+\begin{remark}
+  \ref{cdistance} is also useful as a distance formula, which allows us to deal with isosceles triangles and circles and other questions involving distances.
+\end{remark}
+
+Let's try solve a problem.
+\begin{example} [Simson Line]
+  Let $P$ be a point on the circumcircle of $\triangle ABC$. Let $X$, $Y$, $Z$ be its feet of altitudes to the triangle's three sides. Prove that $X$, $Y$, $Z$ are collinear.\\
+\end{example}
+\begin{soln}
+  Consider a complex coordinate system in which the circumcircle of $\triangle ABC$ is the unit circle.\\
+  $x=\frac{1}{2}(a+b+p-ab\overline{p})$, $y=\frac{1}{2}(a+c+p-ac\overline{p})$, $z=\frac{1}{2}(b+c+p-bc\overline{p})$. \\
+  Now consider $
+  \begin{vmatrix} 
+  \frac{1}{2}(a+b+p-ab\overline{p}) & \overline{\frac{1}{2}(a+b+p-ab\overline{p})} & 1 \\
+  \frac{1}{2}(a+c+p-ac\overline{p}) & \overline{\frac{1}{2}(a+c+p-ac\overline{p})} & 1 \\
+  \frac{1}{2}(b+c+p-bc\overline{p}) & \overline{\frac{1}{2}(b+c+p-bc\overline{p})} & 1 \\
+  \end{vmatrix}
+  $\\
+  $
+  =
+  \begin{vmatrix} 
+  \frac{1}{2}(a+b+p-ab\overline{p}) & \frac{1}{2}(\overline{a}+\overline{b}+\overline{p}-\overline{ab}p) & 1 \\
+  \frac{1}{2}(a+c+p-ac\overline{p}) & \frac{1}{2}(\overline{a}+\overline{c}+\overline{p}-\overline{ac}p) & 1 \\
+  \frac{1}{2}(b+c+p-bc\overline{p}) & \frac{1}{2}(\overline{b}+\overline{c}+\overline{p}-\overline{bc}p) & 1 \\
+  \end{vmatrix}
+  $\\ by \ref{distributive} \\
+  $
+  =
+  \begin{vmatrix} 
+  \frac{1}{2}(a+b+p-\frac{ab}{p}) & \frac{1}{2}(\frac{1}{a}+\frac{1}{b}+\frac{1}{p}-\frac{p}{ab}) & 1 \\
+  \frac{1}{2}(a+c+p-\frac{ac}{p}) & \frac{1}{2}(\frac{1}{a}+\frac{1}{c}+\frac{1}{p}-\frac{p}{ac}) & 1 \\
+  \frac{1}{2}(b+c+p-\frac{bc}{p}) & \frac{1}{2}(\frac{1}{b}+\frac{1}{c}+\frac{1}{p}-\frac{p}{bc}) & 1 \\
+  \end{vmatrix}
+  $ by \ref{cdistance}\\
+  $
+  =
+  \frac{1}{4}\begin{vmatrix} 
+  -a-b-p+\frac{ab}{p} & -\frac{1}{a}-\frac{1}{b}-\frac{1}{p}+\frac{p}{ab} & 1 \\
+  -a-c-p+\frac{ac}{p} & -\frac{1}{a}-\frac{1}{c}-\frac{1}{p}+\frac{p}{ac} & 1 \\
+  -b-c-p+\frac{bc}{p} & -\frac{1}{b}-\frac{1}{c}-\frac{1}{p}+\frac{p}{bc} & 1 \\
+  \end{vmatrix}
+  $ by applying \ref{timek} twice with $k=-\frac{1}{2}$\\
+  $
+  =
+  \frac{1}{4}\begin{vmatrix} 
+  c+\frac{ab}{p} & \frac{1}{c}+\frac{p}{ab} & 1 \\
+  b+\frac{ac}{p} & \frac{1}{b}+\frac{p}{ac} & 1 \\
+  a+\frac{bc}{p} & \frac{1}{a}+\frac{p}{bc} & 1 \\
+  \end{vmatrix}
+  $ by applying \ref{addcolumn} twice with $k=p+a+b+c$\\
+  $
+  =
+  \frac{1}{4}(
+  1\begin{vmatrix}
+  b+\frac{ac}{p} & \frac{1}{b}+\frac{p}{ac} \\
+  a+\frac{bc}{p} & \frac{1}{a}+\frac{p}{bc} \\
+  \end{vmatrix}  
+  +1\begin{vmatrix}
+  a+\frac{bc}{p} & \frac{1}{a}+\frac{p}{bc} \\
+  c+\frac{ab}{p} & \frac{1}{c}+\frac{p}{ab} \\
+  \end{vmatrix}
+  +1\begin{vmatrix}
+  c+\frac{ab}{p} & \frac{1}{c}+\frac{p}{ab} \\
+  b+\frac{ac}{p} & \frac{1}{b}+\frac{p}{ac} \\
+  \end{vmatrix}  
+  )
+  $\\
+  Expanding the first 2x2 determinant gives 0, and by symmetry the other two determinants must be 0 too, so the whole expression is 0, so by \ref{clinear} $XYZ$ are collinear.
+\end{soln}
+\begin{exercise}
+  Given cyclic quadrilateral $ABCD$, let $P$ and $Q$ be the reflection of $C$ across $AB$ and $AD$ respectively. Prove that $PQ$ passes through the orthocentre of $\triangle ABD$. 
+\end{exercise}
+\begin{exercise} [IMO2003/4]
+  Given cyclic quadrilateral $ABCD$, let $P$, $Q$, $R$ be the feet of altitudes from $D$ to $BC$, $CA$, $AB$ respectively. Show that $PQ=QR$ iff the bisectors of $\angle ABC$ and $\angle ADC$ meet on $AC$. \\
+  For this exercise you'll need the formula $AB\cap CD = \cfrac{ab(c+d)-cd(a+b)}{ab-cd}$ for $|A|=|B|=|C|=|D|=1$.
+\end{exercise}
+
+% \section{Additional Footnotes}
+% \begin{abstract}
+%   \sffamily
+%   All geometry is algebra.
+%   \medskip
+  
+%   --- Me
+% \end{abstract}
+% Okay complex numbers are kinda annoying. If only there is a coordinate system that preserves more qualities of vectors and is fancier.
+% \begin{definition}
+%   Fix a reference triangle $ABC$. Each point in the plane can be expressed as $\vec{P}=x\vec{A}+y\vec{B}+z\vec{C}$ or $P(x, y, z)$ for short, where $x+y+z=1$.
+% \end{definition}
+% Wow now we're really pushing it. 3 types of bash in 1 lecture. \\
+% \begin{fact}
+%   $P=(\cfrac{[PBC]}{[ABC]}, \cfrac{[PCA]}{[BCA]}, \cfrac{[PAB]}{[CAB]})$ where $[ABC]$ denotes the signed area of $[ABC]$. 
+% \end{fact}
+% "Signed" as in, if the points $ABC$ are arranged anticlockwise, it's positive; otherwise it's negative. In other words barycentric coordinates formalised the technique of area ratios.
+% \begin{fact}
+%   The equation of a line takes the form of $ux+vy+wz=0$, where $u$, $v$, $w$ are unique up to scaling.
+% \end{fact}
+% \begin{fact}
+%   $(x_1, y_1, z_1)$, $(x_2, y_2, z_2)$, $(x_3, y_3, z_3)$ are collinear iff $\begin{vmatrix} x_1 & y_1 & z_1 \\ x_2 & y_2 & z_2 \\ x_3 & y_3 & z_3 \end{vmatrix} = 0$
+% \end{fact}
+% \begin{fact}
+%   $u_1x+v_1y+w_1z=0$, $u_2x+v_2y+w_2z=0$, $u_3x+v_3y+w_3z=0$ are concurrent iff $\begin{vmatrix} u_1 & v_1 & w_1 \\ u_2 & v_2 & w_2 \\ u_3 & v_3 & w_3 \end{vmatrix} = 0$
+% \end{fact}
+% \begin{fact}\label{bintersection}
+%   Let $det=\begin{vmatrix} u_1 & v_1 & w_1 \\ u_2 & v_2 & w_2 \\ 1 & 1 & 1 \end{vmatrix}$\\
+%   The intersection of $u_1x+v_1y+w_1z=0$ and $u_2x+v_2y+w_2z=0$ is \\ $(\frac{1}{det}\begin{vmatrix} v_1 & w_1 \\ v_2 & w_2 \end{vmatrix}, \frac{1}{det}\begin{vmatrix} w_1 & u_1 \\ w_2 & u_2 \end{vmatrix}, \frac{1}{det}\begin{vmatrix} u_1 & v_1 \\ u_2 & v_2 \end{vmatrix})$\\
+%   When $det=0$,  the two lines are parallel.
+%   \\Outline of proof: solve the following equation with inverse matrix\\
+%   $\begin{pmatrix} u_1 & v_1 & w_1 \\ u_2 & v_2 & w_2 \\ 1 & 1 & 1 \end{pmatrix}
+%   \begin{pmatrix} x\\y\\z\end{pmatrix}= 
+%   \begin{pmatrix} 0\\0\\1\end{pmatrix}$\\
+% \end{fact}
+% Let's look at the centroid example again.
+% \begin{example} [Existence of Centroid]
+%   Prove that the medians of $\triangle ABC$ are concurrent.
+% \end{example}
+% \begin{soln}
+%   Consider a barycentric coordinate system in which $\triangle ABC$ is the reference triangle. \\
+%   $A=(1, 0, 0)$, $M_1=(0, \frac{1}{2}, \frac{1}{2})$\\
+%   Plug $A$ into $ux+vy+wz=0$: $u=0$\\
+%   Plug $M_1$ into $vy+wz=0$: $w=-v$\\
+%   So the equation of $AM_1$ can be $y-z=0$.\\
+%   By symmetry $BM_2$ is $z-x=0$ and $CM_2$ is $x-y=0$.\\
+%   Now we just need to prove\\
+%   $\begin{vmatrix}0 & 1 & -1 \\ -1 & 0 & 1 \\ 1 & -1 & 0 \end{vmatrix}=0$\\
+%   which is trivial to calculate.
+% \end{soln}
+% Wow that wasn't a bash that was a nuke. \\
+% In fact even the generalised version, Ceva's theorem, can be bashed quite easily.
+% \begin{exercise} [Ceva's Theorem]
+%   Given points $D$, $E$, $F$ on $BC$, $AC$, $AB$ respectively, prove that $AD$, $BE$, $CF$ are concurrent iff $\frac{BD}{DC}\frac{CE}{EA}\frac{AF}{FB}=1$. 
+% \end{exercise}
+% Notice that if $(x, y, z)$ is a solution to $ux+vy+wz=0$, so is $(kx, ky, kz)$. So for all line purposes, $(x, y, z)$ and $(kx, ky, kz)$ represent the same point, just like how $ux+vy+wz=0$ and $(ku)x+(kv)y+(kw)z=0$ represent the same line. To differentiate the two, we call $(x, y, z)$ homogenised if $x+y+z=1$, and unhomogenised otherwise, and denoted as $(x:y:z)$.
+% \begin{remark}
+%   What happens when $x+y+z=0$?\\
+%   Notice that in \ref{bintersection}, even if $det=0$, $(\begin{vmatrix} v_1 & w_1 \\ v_2 & w_2 \end{vmatrix} : \begin{vmatrix} w_1 & u_1 \\ w_2 & u_2 \end{vmatrix} : \begin{vmatrix} u_1 & v_1 \\ u_2 & v_2 \end{vmatrix})$ is still a valid solution to the two equations! This is because, when you think about it projectively, two parallel lines are just lines that intersect at a point at infinity.\\
+%   So every point whose coordinates add up to 0 is a point at infinity.
+% \end{remark}
+% \begin{remark}
+%   One variant of MMP uses homogenised coordinates. If you are interested, go talk to Ross.
+% \end{remark}
+% A lot of interesting points and lines have nice formulations in unhomogenised coordinates:
+% \begin{enumerate}
+%   \item $G=(1:1:1)$
+%   \item $I=(a:b:c)$
+%   \item $I_a=(-a:b:c)$
+%   \item $H=(tanA:tanB:tanC)$
+%   \item $O=(sin2A:sin2B:sin2C)$
+%   \item Let $P=(x_1:y_1:z_1)$ be any point other than $A$, then the points on cevian $AP$ can be parametrised by $(t:y_1:z_1)$. 
+%   \item The isotomic conjugate of P is $(\frac{1}{x_1}:\frac{1}{y_1}:\frac{1}{z_1})$
+%   \item The isogonal conjugate of P is $(\frac{a^2}{x_1}:\frac{b^2}{y_1}:\frac{c^2}{z_1})$
+% \end{enumerate}
+% Where $a$, $b$, $c$ denote the length of $BC$, $AC$, $AB$ respectively.\\
+% \begin{exercise} [Pascal's Theorem]
+%   Let A, B, C, D, E, F be six distinct points on a circle. Prove that the three intersections of lines AB and DE, BC and EF, and CD and FA are collinear.
+%   You will need the barycentric circle formula $-a^2yz-b^2zx-c^2xy+(x+y+z)(ux+vy+wz) =0$.
+% \end{exercise}
+
+\section{Strategy}
+\begin{enumerate}
+  \item Only use bash as a method of last resort. In fact, don't think about bashing at all when you first approach a problem. Just do what you normally do: draw a diagram, make conjectures, prove conjectures...
+  \item While attempting the problem, think at the back of your mind:
+    \subitem What you will pick as the axes / unit circle / reference triangle. 
+    \subitem Which phrasing of the problem is the easiest.
+    \subitem Symmetries that you can exploit.
+  \item After proving all the conjectures you can prove synthetically, estimate how long it would take to bash the rest.
+  \item Use coordinate bash when
+    \subitem Parallel / perpendicular lines
+    \subitem Nice angles with rational tan values (and thus rational gradients).
+  \item Use complex bash when
+    \subitem Most point on a single circle
+    \subitem Triangle centers of a triangle inscribed in that circle\\
+  Run away when
+    \subitem Multiple circles
+    \subitem Intersections of arbitrary lines
+  \item Use barycentric bash when
+    \subitem Cevians
+    \subitem Triangle centers of the reference triangle
+    \subitem Intersections of lines, collinearity, and concurrence
+    \subitem Symmetries around the vertices of a triangle
+    \subitem Area and length ratios\\
+  Run away when
+    \subitem Arbitrary circles that don't pass through some nice points on the reference triangle 
+    \subitem Angle conditions
+  \item It is often possible to turn a bad thing into an okay thing. E.g. angle bisector theorem can turn angle conditions into length ratios for barycentric bash. And of course in step 1 you should prioritise proving conjectures that are hard to bash. 
+\end{enumerate}
+To illustrate point 3.2, "phrasing", here is an example:
+\begin{example} [USAMO 2015/2]
+  Quadrilateral $APBQ$ is inscribed in circle $w$ with $\angle P = \angle Q = 90^{\circ}$ and $AP=AQ<BP$. Let X be a variable point on segment $PQ$. Line $AX$ meets $w$ again at $S$ (other than $A$). Point $T$ lies on arc $AQB$ of $w$ such that $XT \perp AX$. Let $M$ denote the midpoint of chord $ST$. As $X$ varies on segment $PQ$, show that $M$ moves along a circle.
+\end{example}
+\begin{soln}
+  Everything seems to be on $w$ so let's make it the unit circle. Notice that $AB$ is a diameter so let $a=-1$ and $b=1$. $Q$ and $P$ are reflections of each other in $AB$ so $q=\overline{p}=\frac{1}{p}$. $AX$ intersects $w$ again at $S$ so we need to solve the set of equations $\frac{s-x}{s+1}=\overline{(\frac{s-x}{s+1})}$ and $\overline{s}=\frac{1}{s}$... Similarly solve a set of equations for $t$, then compute $m$ and then...circle?\\
+  Okay, following the problem statement directly doesn't work. Can we rephrase the problem to make it easier? Notice that expressing $s$ and $t$ in terms of $x$ is a pain in the ass, but suppose we are given $s$ and $t$, we can easily compute $x$ as the foot of altitude from $T$ to $AS$. $x=\frac{1}{2}(s+t-1+\frac{s}{t})$ and $m=\frac{s+t}{2}$. Notice that we don't even need $P$ or $Q$. All they do is fixing $Re(x)$. Also, with some luck you might notice that the center of the circle that M is on is the midpoint of $AO$, where $O$ is the origin. So all we need to prove is that $|\frac{s+t}{2}--\frac{1}{2}|$ is solely dependent on $Re(x)$, which we arrive at after a few lines of algebra:\\
+  $|\frac{s+t}{2}--\frac{1}{2}|^2\\
+  =\frac{1}{4}|s+t+1|^2\\
+  =\frac{1}{4}(s+t+1)\overline{(s+t+1)}\\
+  =\frac{1}{4}(s+t+1)(\frac{1}{s}+\frac{1}{t}+1)\\
+  =\frac{1}{4}(1+\frac{s}{t}+s+\frac{t}{s}+1+t+\frac{1}{s}+\frac{1}{t}+1)\\
+  =\frac{1}{4}((s+t-1+\frac{s}{t})+(\frac{1}{s}+\frac{1}{t}-1+\frac{t}{s})+5)\\
+  =\frac{2x+\overline{2x}+5}{4}\\
+  =\frac{4Re(X)+5}{4}\\
+  $
+\end{soln}
+As seen, don't just apply the problem's logic directly. Take a few minutes to think about how to simplify all the algebraic expressions of your points, and combine them with your synthetic insights. This is why it's so important not to bash problems straight away. The idea of rephrasing and the key observation that the center is $(-\frac{1}{2}, 0)$ should both arise naturally through your synthetic attempts. \\
+\section{More Practice}
+\begin{exercise}[NZMO 2023/3]
+  Let $ABCD$ be a square (vertices labelled in clockwise order). Let $Z$ be any point on diagonal $AC$ between $A$ and $C$ such that $AZ>ZC$. Points $X$ and $Y$ exist such that $AXYZ$ is a square (vertices labelled in clockwise order) and point $B$ lies inside $AXYZ$. Let $M$ be the intersection of $BX$ and $DZ$. Prove that $CMY$ are collinear.
+\end{exercise} 
+\begin{exercise}[APMO 2013/1]
+  Let $ABC$ be an acute triangle with altitudes $AD$, $BE$ and $CF$, and let $O$ be the center of its circumcircle. Show that the segments $OA$, $OF$, $OB$, $OD$, $OC$, $OE$ disect the triangle $ABC$ into three pairs of triangles that have equal areas. 
+\end{exercise}
+\begin{exercise}[APMO 2022/2]
+  Let $ABC$ be a right triangle with $\angle B=90^{\circ}$. Point $D$ lies on the line $CB$ such that $B$ is between $D$ and $C$. Let $E$ be the midpoint of $AD$ and let $F$ be the second intersection of the circumcircle of $\triangle ACD$ and the circumcircle of $\triangle BDE$. Prove that as $D$ varies, the line $EF$ passes through a fixed point.
+\end{exercise}
+\begin{exercise}[Chinese TST 2011]
+  Let $ABC$ be a triangle, and let $A'$, $B'$, $C'$ be points on its circumcircle, diametrically opposite $A$, $B$, $C$ respectively. Let $P$ be any point inside $ABC$ and let $D$, $E$, $F$ be the feet of the altitudes from P onto $BC$, $CA$, $AB$ respectively. Let $X$, $Y$, $Z$ be the reflections of $A'$, $B'$, $C'$ over $D$, $E$, $F$ respectively. Show that $\triangle XYZ$ and $\triangle ABC$ are similar to each other.
+\end{exercise}
+\begin{exercise}[USA TST 2006/6]
+  Let $ABC$ be a triangle. Triangles $PAB$ and $QAC$ are constructed outside of ABC such that $AP=AB$ and $AQ=AC$ and $\angle BAP = \angle CAQ$. Segments $BQ$ and $CP$ meet at $R$. Let $O$ be the circumcenter of $\triangle BCR$. Prove that $AO \perp PQ$.
+\end{exercise}
+
+\section{Final Words}
+This handout aims to provide an overview of complex bash and how it originated from the conventional coordinate bash that we know and love. Due to time constraint, it skipped over a few useful formulas. If you want to actually bash in a contest, go read EGMO ch6. I also removed a section on barycentric coordinates. If you feel like complex numbers weren't enough, talk to me at lunch.\\
+You can practice with any problem. When practicing, time yourself and compare your actual time with your estimated time to calibrate your estimates. It's recommended to play some motivational music because you'll get real bored real soon.\\
+Bashing is not all powerful. (Okay it is but you can't use its full power without a good understanding of synth geometry and a crap ton of practice.) According to Ross, training in bashing is less cost-effective than training in more elementary techniques. However, if you have the time, bashing is certainly a useful tool to have, even if it's just there for reassurance. You can also take advantage of gaps in your schedule that you wouldn't normally spend on Math Olympiad to practice bashing, since it's easier to pause and resume your train of thoughts.\\
+Finally, in case it wasn't clear, this handout isn't actually about linear algebra. 
+\end{document}
